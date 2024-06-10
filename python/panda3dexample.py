@@ -7,40 +7,40 @@ class MyApp(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
 
-        # Pencere başlığını değiştir
+        # Set window title
         properties = WindowProperties()
         properties.setTitle("4K PANDA - Lyke's Code Share")
         self.win.requestProperties(properties)
 
-        # Çevre modelini yükle
+        # Load environment
         self.environ = self.loader.loadModel("models/environment")
         self.environ.reparentTo(self.render)
         self.environ.setScale(0.1, 0.1, 0.1)
         self.environ.setPos(-8, 42, 0)
 
-        # Karakter modelini yükle
+        # Load character model
         self.character = self.loader.loadModel("models/panda-model")
         self.character.reparentTo(self.render)
         self.character.setScale(0.005, 0.005, 0.005)
         self.character.setPos(0, 10, 0)
 
-        # Ambient ışık ekle
+        # Add ambient lightning
         ambientLight = AmbientLight("ambientLight")
         ambientLight.setColor(Vec4(0.3, 0.3, 0.3, 1))
         self.render.setLight(self.render.attachNewNode(ambientLight))
 
-        # Directional ışık ekle
+        # Add directional lightning
         directionalLight = DirectionalLight("directionalLight")
         directionalLight.setDirection((1, 1, -1))
         directionalLight.setColor(Vec4(1, 1, 1, 1))
         self.render.setLight(self.render.attachNewNode(directionalLight))
 
-        # Kamera kontrolünü ayarla
+        # Set camera control
         self.disableMouse()
         self.camera.setPos(0, -30, 10)
         self.camera.lookAt(self.character)
 
-        # Hareket kontrollerini ayarla
+        # Set movement controls
         self.accept("arrow_left", self.move_character, ["left"])
         self.accept("arrow_right", self.move_character, ["right"])
         self.accept("arrow_up", self.move_character, ["up"])
